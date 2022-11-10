@@ -1,4 +1,5 @@
 let calculator = {
+
   sum() {
     return this.a + this.b;
   },
