@@ -1,3 +1,5 @@
 function showSalary(users, age) {
-  return users.filter(user => user.age <= age).map(user => `${user.name}, ${user.balance}`).join('\r\n')
+  let str = ``;
+  users.filter(user => user.age <= age).forEach((element) => str += `${ element.name }, ${ element.balance }\n`);
+  return str.slice(0, -1);
   };
