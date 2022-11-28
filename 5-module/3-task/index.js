@@ -4,12 +4,15 @@ function initCarousel() {
   const carouselInner = document.querySelector('.carousel__inner');
   let off = 0;
   let offset = carouselInner.offsetWidth;
+  let slideNumber = 1;
+  let slidesAmount = 4;
 
   carouselArrowLeft.style.display = "none";
 
   carouselArrowRight.addEventListener('click', function() {
+    slideNumber++;
     off = off - offset;
-    if (carouselInner.style.transform == "translateX(-1976px)") {
+    if (slideNumber === slidesAmount) {
       carouselArrowRight.style.display = 'none';
     }
     carouselInner.style.transform = "translateX(" + off + "px)";
@@ -17,8 +20,9 @@ function initCarousel() {
   })
 
   carouselArrowLeft.addEventListener('click', function() {
+    slideNumber--;
     off = off + offset;
-    if (carouselInner.style.transform == "translateX(-988px)") {
+    if (slideNumber === 1) {
       carouselArrowLeft.style.display = 'none';
     }
     carouselInner.style.transform = "translateX(" + off + "px)";
