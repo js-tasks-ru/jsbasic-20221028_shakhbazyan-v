@@ -34,6 +34,7 @@ export default class StepSlider {
       let approximateValue = leftRelative * segments;
       let value = Math.round(approximateValue);
       let valuePercents = value / segments * 100;
+      this.elem.querySelector('.slider__step-active').classList.remove('slider__step-active')
       let leftPercents = valuePercents;
       thumb.style.left = `${leftPercents}%`;
       progress.style.width = `${leftPercents}%`;
