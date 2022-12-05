@@ -11,7 +11,7 @@ export default class RibbonMenu {
   render() {
     this.elem = createElement(`
     <div class="ribbon">
-      <button class="ribbon__arrow ribbon__arrow_left ribbon__arrow_visible">
+      <button class="ribbon__arrow ribbon__arrow_left">
         <img src="/assets/images/icons/angle-icon.svg" alt="icon">
       </button>
       <nav class="ribbon__inner">
@@ -37,14 +37,14 @@ export default class RibbonMenu {
     let arrowRight = this.elem.querySelector('.ribbon__arrow_right');
     let arrowLeft = this.elem.querySelector('.ribbon__arrow_left');
     let ribbonInner = this.elem.querySelector('.ribbon__inner');
+
     arrowRight.onclick = () => {ribbonInner.scrollBy(350, 0)};
     arrowLeft.onclick = () => {ribbonInner.scrollBy(-350, 0)};
-    let scrollLeft = ribbonInner.scrollLeft;
-    if (scrollLeft == 0) {
-      arrowLeft.classList.remove('ribbon__arrow_visible');
-    }
-
-    console.log(scrollLeft);
+    ribbonInner.addEventListener('scroll', () => {
+      ribbonInner.scrollLeft < 1 ? arrowLeft.classList.remove('ribbon__arrow_visible') : arrowLeft.classList.add('ribbon__arrow_visible')
+      let scrollRight = ribbonInner.scrollWidth - ribbonInner.scrollLeft - ribbonInner.clientWidth
+      scrollRight < 1 ? arrowRight.classList.remove('ribbon__arrow_visible') : arrowRight.classList.add('ribbon__arrow_visible')
+    })
   }
 
   addEventListeners() {
