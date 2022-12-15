@@ -58,11 +58,17 @@ export default class Cart {
 
   getTotalCount() {
     return this.cartItems.reduce((sum, item) => sum + item.count, 0);
+<<<<<<<<< Temporary merge branch 1
+  }
+
+  getTotalPrice() {
+=========
     // ваш код
   }
 
   getTotalPrice() {
     // ваш код
+>>>>>>>>> Temporary merge branch 2
     return this.cartItems.reduce(
       (sum, item) => sum + item.product.price * item.count,
       0
