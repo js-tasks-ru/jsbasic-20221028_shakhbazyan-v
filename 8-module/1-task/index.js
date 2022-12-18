@@ -38,6 +38,8 @@ export default class CartIcon {
   }
 
   updatePosition() {
+if (!this.elem.offsetHeight) {return};
+
     let leftIndent = Math.min(
       document.querySelector('.container').getBoundingClientRect().right + 20,
       document.documentElement.clientWidth - this.elem.offsetWidth - 10

@@ -27,7 +27,7 @@ export default class ProductCard {
     })
   }
 
-  
+
 
   get elem() {
     return this._elem;
