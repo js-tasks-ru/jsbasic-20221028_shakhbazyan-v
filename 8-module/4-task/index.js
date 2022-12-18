@@ -1,21 +1,26 @@
-import createElement from '../../assets/lib/create-element.js';
-import escapeHtml from '../../assets/lib/escape-html.js';
+import createElement from "../../assets/lib/create-element.js";
+import escapeHtml from "../../assets/lib/escape-html.js";
 
-import Modal from '../../7-module/2-task/index.js';
+import Modal from "../../7-module/2-task/index.js";
 
 export default class Cart {
   cartItems = []; // [product: {...}, count: N]
 
   constructor(cartIcon) {
     this.cartIcon = cartIcon;
-
     this.addEventListeners();
   }
 
   addProduct(product) {
+    // ваш код
+    if (!product) {
+      return;
+    }
+
     let cartItem = this.cartItems.find(
-      item => item.product.id == product.id
-    );
+      item => item.product.id === product.id
+    )
+
     if (!cartItem) {
       cartItem = {
         product,
@@ -30,18 +35,25 @@ export default class Cart {
   }
 
   updateProductCount(productId, amount) {
-    let cartItem = this.cartItems.find(item => item.product.id == productId);
+    // ваш код
+    let cartItem = this.cartItems.find(
+      item => item.product.id === productId
+    )
     cartItem.count += amount;
 
-    if (cartItem.count == 0) {
+    if (cartItem.count === 0) {
       this.cartItems.splice(this.cartItems.indexOf(cartItem), 1);
     }
-
     this.onProductUpdate(cartItem);
   }
 
   isEmpty() {
-    return this.cartItems.length === 0;
+    // ваш код
+    if (this.cartItems.length > 0) {
+      return false
+    } else {
+      return true
+    }
   }
 
   getTotalCount() {
@@ -49,6 +61,7 @@ export default class Cart {
   }
 
   getTotalPrice() {
+
     return this.cartItems.reduce(
       (sum, item) => sum + item.product.price * item.count,
       0
@@ -57,9 +70,7 @@ export default class Cart {
 
   renderProduct(product, count) {
     return createElement(`
-    <div class="cart-product" data-product-id="${
-      product.id
-    }">
+    <div class="cart-product" data-product-id="${product.id}">
       <div class="cart-product__img">
         <img src="/assets/images/products/${product.image}" alt="product">
       </div>
@@ -125,7 +136,6 @@ export default class Cart {
 
     this.modal.setBody(this.modalBody);
 
-    // when modal is closed, we forget about it, don't update it any more
     this.modal.elem.addEventListener('modal-close', () => {
       this.modal = null;
       this.modalBody = null;
@@ -153,7 +163,6 @@ export default class Cart {
     }
 
     if (this.cartItems.length == 0) {
-      // No products, close the modal
       this.modal.close();
       return;
     }
